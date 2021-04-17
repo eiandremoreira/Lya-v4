@@ -11,8 +11,7 @@ class EventStructure {
         if (this.enabled) {
             this.run(...args);
         }
-        throw new Error(`Event ${this.constructor.name} is missing the run method.`);
+        throw new Error(`Evento ${this.constructor.name} está faltando o metodo run.`);
     }
 }
 exports.EventStructure = EventStructure;
-//# sourceMappingURL=EventStructure.js.map

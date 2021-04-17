@@ -13,7 +13,6 @@ const path_1 = require("path");
 const fs_nextra_1 = require("fs-nextra");
 class ClientHandler extends eris_1.Collection {
     constructor(client, name) {
-        // @ts-ignore
         super();
         this.client = client;
         this.name = name;

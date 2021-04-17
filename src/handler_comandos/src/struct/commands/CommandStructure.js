@@ -37,8 +37,7 @@ class CommandStructure {
         if (this.enabled) {
             this.run(...args);
         }
-        throw new Error(`Command ${this.constructor.name} is missing the run method.`);
+        throw new Error(`Comando ${this.constructor.name} está faltando o metodo run.`);
     }
 }
 exports.CommandStructure = CommandStructure;
-//# sourceMappingURL=CommandStructure.js.map

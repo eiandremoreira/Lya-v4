@@ -5,7 +5,6 @@ class CommandHandler extends ClientHandler {
     constructor(client, path) {
         super(client, path);
         this.client = client;
-        // @ts-ignore
         this.aliases = new eris_1.Collection();
     }
     get(name) {
@@ -36,4 +35,3 @@ class CommandHandler extends ClientHandler {
     }
 }
 module.exports = CommandHandler;
-//# sourceMappingURL=CommandHandler.js.map
