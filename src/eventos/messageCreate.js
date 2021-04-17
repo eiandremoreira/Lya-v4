@@ -47,7 +47,7 @@ class MessageCreate extends EventStructure {
             const util = require('util');
             const read = util.promisify(readFile);
             var caixa = {};
-               if (chance <= 15) {
+               if (chance <= 10) {
                   let box = Math.round(Math.random() * (50 - 1)) + 1;
 
                   if (box <= 50) {
@@ -92,8 +92,19 @@ class MessageCreate extends EventStructure {
 
 
                this.client.on('messageCreate', async (msg) => {
-                  let nome = caixa.name || caixa.name2;
-                  if (msg.content.toLowerCase() === `pick ${nome}`) {
+                  if (msg.content.toLowerCase() === `pick ${caixa.name}`) {
+                     let author = msg.member;
+                     if (picked === true) return;
+                     if (!Database.get(`Money.${author.id}`)) {
+                        await Database.set(`Money.${author.id}`, 0);
+                        Database.add(`Money.${author.id}`, caixa.value);
+                    } else {
+                        Database.add(`Money.${author.id}`, caixa.value);
+                    }
+                    message.channel.createMessage(idioma.drop.yay.replace("{user}", author).replace("{valor}", caixa.value));
+
+                     return picked = true;
+                  } else if (msg.content.toLowerCase() === `pick ${caixa.name2}`) {
                      let author = msg.member;
                      if (picked === true) return;
                      if (!Database.get(`Money.${author.id}`)) {

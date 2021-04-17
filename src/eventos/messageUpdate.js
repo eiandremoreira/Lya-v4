@@ -47,62 +47,78 @@ class MessageUpdate extends EventStructure {
             const util = require('util');
             const read = util.promisify(readFile);
             var caixa = {};
-               if (chance <= 15) {
-                  let box = Math.round(Math.random() * (50 - 1)) + 1;
+            if (chance <= 10) {
+               let box = Math.round(Math.random() * (50 - 1)) + 1;
 
-                  if (box <= 50) {
-                    caixa.name = ["box", "caixa"];
-                    caixa.image = "./src/images/box.png";
-                    caixa.value = Math.round(Math.random() * (5000, 1000)) + 1000;
-                 }
-                 if (box <= 5) {
-                    caixa.name = "?";
-                    caixa.image = "./src/images/mystery_box.png";
-                    caixa.value = Math.round(Math.random() * (50000, 1)) + 1;
-                 }
-                 if (box <= 35) {
-                    caixa.name = ["big box", "caixa grande"];
-                    caixa.image = "./src/images/big_box.png";
-                    caixa.value = Math.round(Math.random() * (1000, 5000)) + 5000;
-                 }      
-                 if (box <= 15) {
-                    caixa.name = ["chest", "bau"];
-                    caixa.image = "./src/images/chest.png";
-                    caixa.value = Math.round(Math.random() * (25000, 10000)) + 10000;
-                 }
-                 if (box <= 9) {
-                    caixa.name = ["safe", "cofre"];
-                    caixa.image = "./src/images/safe.png";
-                    caixa.value = Math.round(Math.random() * (50000, 25000)) + 25000;
-                 }
-
-
-                  await message.channel.createMessage(idioma.drop.txt, {
-                     file: await read(`${await caixa.image}`), 
-                     name: "box.png"
-                  })
-      
-                  var picked;
-
-                  picked = false;
+               if (box <= 50) {
+                  caixa.name = "box";
+                  caixa.name2 = "caixa";
+                  caixa.image = "./src/images/box.png";
+                  caixa.value = Math.round(Math.random() * (5000, 1000)) + 1000;
+               }
+               if (box <= 5) {
+                  caixa.name = "?";
+                  caixa.image = "./src/images/mystery_box.png";
+                  caixa.value = Math.round(Math.random() * (50000, 1)) + 1;
+               }
+               if (box <= 35) {
+                  caixa.name = "big box";
+                  caixa.name2 = "caixa grande";
+                  caixa.image = "./src/images/big_box.png";
+                  caixa.value = Math.round(Math.random() * (1000, 5000)) + 5000;
+               }      
+               if (box <= 15) {
+                  caixa.name = "chest";
+                  caixa.name2 = "bau";
+                  caixa.image = "./src/images/chest.png";
+                  caixa.value = Math.round(Math.random() * (25000, 10000)) + 10000;
+               }
+               if (box <= 9) {
+                  caixa.name = "safe";
+                  caixa.name2 = "cofre";
+                  caixa.image = "./src/images/safe.png";
+                  caixa.value = Math.round(Math.random() * (50000, 25000)) + 25000;
+               }
 
 
-               this.client.on('messageCreate', async (msg) => {
-                  if (msg.content.toLowerCase() === `pick ${caixa.name}`) {
-                     let author = msg.member;
-                     if (picked === true) return;
-                     if (!Database.get(`Money.${author.id}`)) {
-                        await Database.set(`Money.${author.id}`, 0);
-                        Database.add(`Money.${author.id}`, caixa.value);
-                    } else {
-                        Database.add(`Money.${author.id}`, caixa.value);
-                    }
-                    message.channel.createMessage(idioma.drop.yay.replace("{user}", author).replace("{valor}", caixa.value));
-
-                     return picked = true;
-                  }
+               await message.channel.createMessage(idioma.drop.txt, {
+                  file: await read(`${await caixa.image}`), 
+                  name: "box.png"
                })
-            }
+   
+               var picked;
+
+               picked = false;
+
+
+            this.client.on('messageCreate', async (msg) => {
+               if (msg.content.toLowerCase() === `pick ${caixa.name}`) {
+                  let author = msg.member;
+                  if (picked === true) return;
+                  if (!Database.get(`Money.${author.id}`)) {
+                     await Database.set(`Money.${author.id}`, 0);
+                     Database.add(`Money.${author.id}`, caixa.value);
+                 } else {
+                     Database.add(`Money.${author.id}`, caixa.value);
+                 }
+                 message.channel.createMessage(idioma.drop.yay.replace("{user}", author).replace("{valor}", caixa.value));
+
+                  return picked = true;
+               } else if (msg.content.toLowerCase() === `pick ${caixa.name2}`) {
+                  let author = msg.member;
+                  if (picked === true) return;
+                  if (!Database.get(`Money.${author.id}`)) {
+                     await Database.set(`Money.${author.id}`, 0);
+                     Database.add(`Money.${author.id}`, caixa.value);
+                 } else {
+                     Database.add(`Money.${author.id}`, caixa.value);
+                 }
+                 message.channel.createMessage(idioma.drop.yay.replace("{user}", author).replace("{valor}", caixa.value));
+
+                  return picked = true;
+               }
+            })
+         }
          };  
       // Prefixo e sets
       const prefix = Database.get(`Prefix.${message.channel.guild.id}`) ? Database.get(`Prefix.${message.channel.guild.id}`) : "lya!"; 
