@@ -57,22 +57,6 @@ module.exports = async (client) => {
                 }
             }
 
-            if (
-                interaction.data &&
-                interaction.data.resolved &&
-                interaction.data.resolved.roles
-            ) {
-                for (const cargo in interaction.data.resolved.roles) {
-                    // Define o cargo na collection[id, properties]
-                    interaction.mention_roles.set(
-                        cargo,
-                        client.guilds
-                            .cache.get(interaction.guild_id)
-                            .roles.cache.get(interaction.data.resolved.roles[cargo]),
-                    );
-                }
-            }
-
             const args = interaction.data.options
 			? interaction.data.options.map((i) => {
 				switch (i.type) {
