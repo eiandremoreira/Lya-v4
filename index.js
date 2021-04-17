@@ -3,7 +3,6 @@ require("colors");
 require("eris-reactions");
 require("./src/complementos/mention");
 require("eris-collector");
-require("eris-embed-builder");
 require("eris-additions");
 
 // Handler
