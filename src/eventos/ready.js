@@ -6,8 +6,10 @@ class ReadyEvent extends EventStructure {
           name: "ready"
        });
     }
-    run() {
+    async run() {
       console.log(`Conectado na conta ${this.client.user.username+"#"+this.client.user.discriminator}`.brightBlue);
+      const guilds = this.client.guilds.size;
+      this.client.editStatus("online", {game: "add me", name: `💪 My Hero Academia | ${guilds} servers | lya!vote | v4`, type: 0})
     }
  }
 

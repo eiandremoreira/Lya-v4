@@ -2,10 +2,10 @@ const {EventStructure} =  require("../handler_comandos/index");
 const {get} = require("quick.db");
 var cooldown = {}
 
-class MessageCreate extends EventStructure {
+class MessageUpdate extends EventStructure {
    constructor(client) {
       super(client, {
-         name: "messageCreate"
+         name: "messageUpdate"
       })
    }
    async run(message) {
@@ -51,34 +51,30 @@ class MessageCreate extends EventStructure {
                   let box = Math.round(Math.random() * (50 - 1)) + 1;
 
                   if (box <= 50) {
-                     caixa.name = "box";
-                     caixa.name2 = "caixa";
-                     caixa.image = "./src/images/box.png";
-                     caixa.value = Math.round(Math.random() * (5000, 1000)) + 1000;
-                  }
-                  if (box <= 5) {
-                     caixa.name = "?";
-                     caixa.image = "./src/images/mystery_box.png";
-                     caixa.value = Math.round(Math.random() * (50000, 1)) + 1;
-                  }
-                  if (box <= 35) {
-                     caixa.name = "big box";
-                     caixa.name2 = "caixa grande";
-                     caixa.image = "./src/images/big_box.png";
-                     caixa.value = Math.round(Math.random() * (1000, 5000)) + 5000;
-                  }      
-                  if (box <= 15) {
-                     caixa.name = "chest";
-                     caixa.name2 = "bau";
-                     caixa.image = "./src/images/chest.png";
-                     caixa.value = Math.round(Math.random() * (25000, 10000)) + 10000;
-                  }
-                  if (box <= 9) {
-                     caixa.name = "safe";
-                     caixa.name2 = "cofre";
-                     caixa.image = "./src/images/safe.png";
-                     caixa.value = Math.round(Math.random() * (50000, 25000)) + 25000;
-                  }
+                    caixa.name = ["box", "caixa"];
+                    caixa.image = "./src/images/box.png";
+                    caixa.value = Math.round(Math.random() * (5000, 1000)) + 1000;
+                 }
+                 if (box <= 5) {
+                    caixa.name = "?";
+                    caixa.image = "./src/images/mystery_box.png";
+                    caixa.value = Math.round(Math.random() * (50000, 1)) + 1;
+                 }
+                 if (box <= 35) {
+                    caixa.name = ["big box", "caixa grande"];
+                    caixa.image = "./src/images/big_box.png";
+                    caixa.value = Math.round(Math.random() * (1000, 5000)) + 5000;
+                 }      
+                 if (box <= 15) {
+                    caixa.name = ["chest", "bau"];
+                    caixa.image = "./src/images/chest.png";
+                    caixa.value = Math.round(Math.random() * (25000, 10000)) + 10000;
+                 }
+                 if (box <= 9) {
+                    caixa.name = ["safe", "cofre"];
+                    caixa.image = "./src/images/safe.png";
+                    caixa.value = Math.round(Math.random() * (50000, 25000)) + 25000;
+                 }
 
 
                   await message.channel.createMessage(idioma.drop.txt, {
@@ -92,8 +88,7 @@ class MessageCreate extends EventStructure {
 
 
                this.client.on('messageCreate', async (msg) => {
-                  let nome = caixa.name || caixa.name2;
-                  if (msg.content.toLowerCase() === `pick ${nome}`) {
+                  if (msg.content.toLowerCase() === `pick ${caixa.name}`) {
                      let author = msg.member;
                      if (picked === true) return;
                      if (!Database.get(`Money.${author.id}`)) {
@@ -130,7 +125,15 @@ class MessageCreate extends EventStructure {
     
       cooldown[message.member.id][clientCommand.name] = Date.now() + clientCommand.cooldown;
 
-      // Erros - Criação de Mensagem
+      // Slash
+      this.client.on("rawWS", async(packet) => {
+         if (packet.t === "INTERACTION_CREATE") {
+             const data = packet.d;
+             const interaction = new Interaction(data, this.client.token, this.client.user.id);
+             this.client.commands.get(interaction.command.name).run(message, args, idioma, prefix, Database);
+         }
+     })
+      // Erros - Edição de Mensagem
       if (!clientCommand) return;
       if (clientCommand.args && args.length < clientCommand.args.o) return message.channel.createMessage({"content": message.member, "embed": {"description": idioma.handler.no_args.replace("{prefix}", prefix).replace("{command}", clientCommand.name), "color": Database.get(`Embeds.colors.${message.channel.guild.id}`) ? Database.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790}});
       if (clientCommand.supportServerOnly && message.channel.guild.id !== "Your guild ID") return; 
@@ -151,4 +154,4 @@ class MessageCreate extends EventStructure {
    }
 }
 
-module.exports = MessageCreate;
+module.exports = MessageUpdate;
