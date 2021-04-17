@@ -9,8 +9,9 @@ class Idioma extends CommandStructure {
             usage: "<pt | en | [me <pt | en>]>",
             args: {
                 o: 1,
-                n: [2, 3],
+                n: 2,
             },
+            cooldown: 12000,
             usages: [
                 "idioma pt",
                 "idioma en",
@@ -27,7 +28,7 @@ class Idioma extends CommandStructure {
             }
         })
     }
-    async run(message, args, idioma) {
+    async run(message, args, idioma, prefix, db) {
         if (args[0] === "me") {
             if (!["en", "pt", "pt-br", "en-us"].some(a => args[1] === a)) {
                 message.channel.createMessage(`${message.member}, ${idioma.lang.list}`);
@@ -41,11 +42,13 @@ class Idioma extends CommandStructure {
         } else if (!["en", "pt", "pt-br", "en-us"].some(a => args[0] === a)) {
                 message.channel.createMessage(`${message.member}, ${idioma.lang.list}`);
             } else if (args[0].includes("pt") || args[0].includes("pt-br")) {
+                if (await !message.member.permission.has("manageGuild")) return message.channel.createMessage({content: "Teste Foda",messageReferenceID: message.id});
                 await set(`Idioma_${message.channel.guild.id}`, "pt");
-                await message.addReaction("✅");
+                await message.channel.createMessage(idioma.lang.guild.pt);
             } else {
-                set(`Idioma_${message.channel.guild.id}`, "en");
-                await message.addReaction("✅");
+                if (await !message.member.permission.has("manageGuild")) return message.channel.createMessage({content: "Teste Foda",messageReferenceID: message.id});
+                await set(`Idioma_${message.channel.guild.id}`, "en");
+                await message.channel.createMessage(idioma.lang.guild.en);
             }
     }
 }

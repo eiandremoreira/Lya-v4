@@ -27,13 +27,13 @@ class Ajuda extends CommandStructure {
             }
         })
     }
-    async run(message, args, idioma, prefix) {
+    async run(message, args, idioma, prefix, db) {
         const commands = await this.client.commands;
         const lang = get(`Idioma_${message.member.id}`) || get(`Idioma_${message.channel.guild.id}`) || "pt";
 
         if (!args[0]) {
             let embed = new MessageEmbed()
-            embed.setColor("2F3136");
+            embed.setColor(db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790);
             embed.setThumbnail(this.client.user.avatarURL);
             embed.setFooter(idioma.exe.replace("{user}", `${message.member.username}#${message.member.discriminator}`), message.member.avatarURL);
             embed.setAuthor(idioma.help.title_commandos, message.member.avatarURL);
@@ -81,7 +81,7 @@ class Ajuda extends CommandStructure {
             message.channel.createMessage({
                 "content": message.member,
                 "embed": {
-                    "color": 3092790,
+                    "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790,
                     "author": {
                         "icon_url": message.member.avatarURL,
                         "name": idioma.help.title_commando
@@ -93,7 +93,7 @@ class Ajuda extends CommandStructure {
                     },
                     {
                         "name": `🔎 ${idioma.help.args}`,
-                        "value": `${idioma.help.args_t} ${command.args.n.length + command.args.o || "0"}\n${idioma.help.args_o} ${command.args.o || "0"}\n${idioma.help.args_n} ${command.args.n || "0"}`
+                        "value": `${idioma.help.args_t} ${command.args.n?command.args.n.length:0 + command.args.o?command.args.o:0}\n${idioma.help.args_o} ${command.args.o || "0"}\n${idioma.help.args_n} ${command.args.n || "0"}`
                     }],
                     "footer": {
                         "text": idioma.exe

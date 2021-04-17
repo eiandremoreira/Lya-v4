@@ -24,7 +24,7 @@ class Avatar extends CommandStructure {
             }
         })
     }
-    async run(message, args, idioma) {
+    async run(message, args, idioma, prefix, db) {
         var user = {};
 
         if (message.mentions[0]) {
@@ -54,7 +54,7 @@ class Avatar extends CommandStructure {
                 "icon_url": avatar,
                 "url": avatar
             },
-            "color": 3092790
+            "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790
         }})
     }
 }

@@ -1,6 +1,5 @@
 const {CommandStructure} = require("../../handler_comandos/index");
 const parseMilliseconds = require('parse-ms');
-const prettyMilliseconds = require('pretty-ms');
 const toFinite = require('lodash.tofinite');
 const moment = require("moment-timezone");
 const {get} = require("quick.db");
@@ -15,6 +14,7 @@ class Userinfo extends CommandStructure {
                 en: "See a user's information!"
             },
             usages: [
+                "userinfo",
                 "userinfo <@!757928932199891094>",
                 "userinfo 757928932199891094"
             ],
@@ -28,7 +28,7 @@ class Userinfo extends CommandStructure {
             }
         })
     }
-    async run(message, args, idioma) {
+    async run(message, args, idioma, prefix, db) {
         var user = {};
 
         if (message.mentions[0]) {
@@ -84,7 +84,7 @@ class Userinfo extends CommandStructure {
     ]
     let permissionsMap;
     for (permsIndex=0; permsIndex<permissionsArray.length; permsIndex++) {
-        if (user.bot === false) {
+        if (!user.bot) {
             if (user.permissions.has(permissionsArray[permsIndex][0])) {
                 permissionsMap += permissionsArray[permsIndex][1]+", ";
             } else {
@@ -92,15 +92,16 @@ class Userinfo extends CommandStructure {
             }
         }
     }
-    let criado = parseMilliseconds(await toFinite(user.createdAt - Date.now()))
+    let criado = parseMilliseconds(await toFinite(user.createdAt - Date.now()));
 
         message.channel.createMessage({
             "embed": {
                 "footer": {
                     "text": idioma.exe
-                    .replace("{user}", `${user.username}#${user.discriminator}`),
+                    .replace("{user}", `${message.member.username}#${message.member.discriminator}`),
                     "icon_url": message.member.avatarURL
-                },                "author": {
+                },                
+                "author": {
                     "name": idioma.userinfo.title.replace("{user}", `${user.username}`),
                     "icon_url": user.avatarURL,
                     "url": `https://discord.com/users/${user.id}`
@@ -130,7 +131,7 @@ class Userinfo extends CommandStructure {
                         "value": `\`\`\`${permissionsMap || "?"}\`\`\``.replace("undefined", "")
                     }
                 ],
-                "color": 3092790
+                "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790
             }
         })
     }
