@@ -1,7 +1,10 @@
 module.exports = {
     exe: "Run by {user}!",
+    slash: "<:slash:833031545022578698> Used by {user}!",
     handler: {
-        no_args: "It seems that some arguments are missing, for more information `{prefix}help {command}`!"
+        cooldown: "Wait {time} second(s) to use this command again!",
+        no_args: "It seems that some arguments are missing, for more information `{prefix}help {command}`!",
+        no_perm: "You do not have permission `{perm}` to use this command!"
     },
     avatar: {
         txt1: "Avatar of {user}",
@@ -12,6 +15,10 @@ module.exports = {
         me: {
             pt: "🇧🇷 Agora irei falar em `português-brasileiro` com você!",
             en: "🇺🇸 Now I will speak in `english` with you!"
+        },
+        guild: {
+            pt: "🇧🇷 Agora irei falar em `português-brasileiro` no servidor!",
+            en: "🇺🇸 Now I will speak in `english` in this guild!"
         }
     },
     help: {
@@ -29,6 +36,7 @@ module.exports = {
         args_o: "Mandatory:",
         args_t: "Total:",
         err: {
+            no_command: "❌ No commands found with name **{name}**!",
             no_desc: "No description.",
             no_alias: "No aliases.",
             no_usages: "No usages.",
@@ -46,6 +54,56 @@ module.exports = {
         minutes: "minutes",
         and: "and",
         title: "{user}'s Info."
+    },
+    serverinfo: {
+        name: "Name",
+        members: "Members",
+        region: "Region",
+        verifi: "Verification",
+        roles: "Roles",
+        channels: "Channels",
+        created: "Created on",
+        joined: "I joined here on",
+        verification: {
+            none: "None",
+            low: "Low",
+            medium: "Medium",
+            high: "High",
+            highest: "Highest"
+        }
+    },
+    raspadinha: {
+        desc1: "Will you win some prizes?",
+        desc2: "💸 Scratch Card 💸",
+        msg1: ":tada: This message shows what you have won!",
+        txt1: ":x: Where's the combination?\nOnly in anger will I catch 10,000 :yen: of you :rage:",
+        txt2: ":tada: Congratulations {user} you win **{conta} :yen:**!",
+        err: {
+            err1: ":x: You need 5,000 💴 to purchase a scratch card!",
+            err2: ""
+        }
+    },
+    prefix: {
+        txt: "My prefix on this guild has been changed to ",
+        err: "My prefix on this guild is already "
+    },
+    balance: {
+        desc: "Balance of {user}!",
+        wallet: "💰 Wallet",
+        bank: "🏦 Bank"
+    },
+    nitro: {
+        desc: "When activating the poor nitro, every time someone who does not have nitro sends an emoji that is not from that guild or animated I will send it via webhook.",
+        on: "On",
+        off: "Off",
+        nitro: "<a:nitro_gaming:832300506353369098> Poor Nitro",
+        ativado: "<a:nitro_gaming:832300506353369098> Poor nitro activated!",
+        desativado: "<a:nitro_gaming:832300506353369098> Poor nitro disabled!"
+    },
+    drop: {
+        txt: "**Box drop**, Type pick `<box>` in chat!\nBox drops give rewards like cash (in bot ok does not come to ask for money in the lrd dm no :rage:) <:CB_wow:832774308098342933>`",
+        yay: ":tada: Congratulations {user} you opened the box and received **{valor}** :yen:",
+        cmd: "By activating the drop system, from time to time I will drop a box that people can pick up and receive rewards!",
     },
     permissions: {
         P1: "Create instant invitations",
