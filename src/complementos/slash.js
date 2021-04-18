@@ -94,7 +94,7 @@ module.exports = async (client) => {
          await client.requestHandler.request("POST", `/interactions/${interaction.id}/${interaction.token}/callback`, false, {
             type: 4,
             data: {
-                content: idioma.slash.replace("{user}", msg.member.nick)
+                content: idioma.slash.replace("{user}", msg.member.nick || msg.member.username)
             }
         })
 
