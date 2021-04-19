@@ -1,3 +1,5 @@
+"use strict";
+
 const { CommandStructure } = require("../../handler_comandos/index");
 
 class Eval extends CommandStructure {
@@ -5,6 +7,14 @@ class Eval extends CommandStructure {
         super(client, {
             name: "eval",
             ownerOnly: true,
+            description: {
+                pt: "oi?",
+                en: "hi?"
+            },
+            category: {
+                pt: "Desenvolvedor",
+                en: "Developer"
+            },
             args: {
                 o: 1,
                 n: 0
@@ -12,10 +22,16 @@ class Eval extends CommandStructure {
         })
     }
     async run (message, args, idioma, prefix, db) {
-        let r = await eval(args.slice(0).join(" ")).catch(e => {
-            return message.channel.createMessage(`\`\`\`js\n${e}\`\`\``)
-        });
-        message.channel.createMessage(`\`\`\`js\n${r}\`\`\``)
+        try {
+            let r = await eval(message.content.slice(prefix.length).trim().split(/ +/g).slice(1).join(" "));
+            if (r instanceof Promise) await r;
+            if (typeof result !== 'string') r = require('util').inspect(r);
+            if (r) {
+                message.channel.createMessage(`\`\`\`js\n${r.slice(0, 1900)}\`\`\``)
+            }
+        } catch (e) {
+            message.channel.createMessage(`\`\`\`js\n${e.stack.slice(0, 2000)}\`\`\``)
+        }
     }
 }
 
