@@ -22,6 +22,7 @@ module.exports = {
         }
     },
     help: {
+        embed_base: `<:prefixo:795208415323488286> My current prefix on the guild **{guild}** is \`{prefix}\`\n\n**{prefix}**help \`<cmd>\` for more information about a command.\n\n<:CB_wow:832774308098342933> Add me by clicking [here](https://discord.com/api/oauth2/authorize?client_id={id}&permissions=4228377846&scope=bot)!`,
         title_commando: "Command help.",
         title_category: "Help by category.",
         title_commandos: "Command list.",
@@ -53,7 +54,8 @@ module.exports = {
         hours: "hours",
         minutes: "minutes",
         and: "and",
-        title: "{user}'s Info."
+        title: "{user}'s Info.",
+        x: ":x: No users found!"
     },
     serverinfo: {
         name: "Name",
@@ -104,6 +106,10 @@ module.exports = {
         txt: "**Box drop**, Type pick `<box>` in chat!\nBox drops give rewards like cash (in bot ok does not come to ask for money in the lrd dm no :rage:) <:CB_wow:832774308098342933>`",
         yay: ":tada: Congratulations {user} you opened the box and received **{valor}** :yen:",
         cmd: "By activating the drop system, from time to time I will drop a box that people can pick up and receive rewards!",
+    },
+    calculadora: {
+        txt: "🧐 **Question:**\n{q}\n\n🤓 **Result:**\n{c}",
+        x: ":x: Insert a valid account!"
     },
     permissions: {
         P1: "Create instant invitations",

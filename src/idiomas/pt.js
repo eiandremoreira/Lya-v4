@@ -22,6 +22,7 @@ module.exports = {
         }
     },
     help: {
+        embed_base: `<:prefixo:795208415323488286> Meu prefixo atual no servidor **{guild}** é \`{prefix}\`\n\n**{prefix}**ajuda \`<cmd>\` para mais informações sobre algum comando.\n\n<:CB_wow:832774308098342933> Me adicione clicando [aqui](https://discord.com/api/oauth2/authorize?client_id={id}&permissions=4228377846&scope=bot)!`,
         title_commando: "Ajuda de comando.",
         title_category: "Ajuda por categoria.",
         title_commandos: "Lista de comandos.",
@@ -53,7 +54,8 @@ module.exports = {
         hours: "horas",
         minutes: "minutos",
         and: "e",
-        title: "Informações de {user}."
+        title: "Informações de {user}.",
+        x: ":x: Nenhum usuário encontrado!"
     },
     serverinfo: {
         name: "Nome",
@@ -104,6 +106,10 @@ module.exports = {
         txt: "**Drop de caixa**, Escreva pick `<caixa>` no chat!\nDrops de caixas dão recompensas como dinheiro (no bot ok não vem pedir money na dm do lrd não :rage:) <:CB_wow:832774308098342933>`",
         yay: ":tada: Parabéns {user} você abriu a caixa e recebeu **{valor}** :yen:",
         cmd: "Ativando o sistema de drop, de vez em quando eu irei dropar uma caixa que as pessoas poderão pegar e receber recompensas!"
+    },
+    calculadora: {
+        txt: "🧐 **Questão:**\n{q}\n\n🤓 **Resposta:**\n{c}",
+        x: ":x: Insirá uma conta válida!"
     },
     permissions: {
         P1: "Criar convites instantâneos",
