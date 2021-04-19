@@ -28,35 +28,36 @@ class Ajuda extends CommandStructure {
         })
     }
     async run(message, args, idioma, prefix, db) {
-        const commands = await this.client.commands;
         const lang = get(`Idioma_${message.member.id}`) || get(`Idioma_${message.channel.guild.id}`) || "pt";
 
-        if (!args[0]) {
-            let embed = new MessageEmbed()
-            embed.setColor(db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790);
-            embed.setThumbnail(this.client.user.avatarURL);
-            embed.setFooter(idioma.exe.replace("{user}", `${message.member.username}#${message.member.discriminator}`), message.member.avatarURL);
-            embed.setAuthor(idioma.help.title_commandos, message.member.avatarURL);
+        if (args[0] === "dm" || !args[0]) {
 
-            let cat = await commands.filter(cmd => cmd.category).map((c) => {
-                var u = {};
-                u = c.usage || idioma.help.err.no_use;
-                var cat = {};
-                var dec = {};
-                var desc = {};
+            let embedBase = new MessageEmbed()
 
-                if (!c.description.pt || !c.description.en) desc = idioma.help.err.no_desc;
-                else if (lang === "pt") desc = c.description.pt;
-                else c.description.en;
+            var channel = "";
+            if (args[0] === "dm") {
+                try {
+                    channel = await this.client.getDMChannel(message.member.id);
+                    if (channel.createMessage({"embed": embedBase})) message.channel.createMessage("<:aqua_ok:833516112884662272> Verifique sua dm.")
+                } catch (e) {
+                    return message.channel.createMessage("Sua dm está fechada por favor deixe ela aberta!")
+                }
+            } else {
+                channel = message.channel;
+            }
 
-                if (lang === "pt") cat = c.category.pt, dec = desc;
-                else cat = c.category.en, dec = desc;    
-
-                return `**${cat}** - ${c.name} \`${u}\`\n${dec}`;
-
-            }).join("\n")
-            embed.setDescription(cat)
-            message.channel.createMessage({"embed": embed})
+            await channel.createMessage({"embed": {"color": 4360181, "description": idioma.help.embed_base.replace("{guild}", message.channel.guild.name).replace("{prefix}", prefix).replace("{prefix}", prefix).replace("{id}", this.client.user.id), "author": {"name": idioma.help.title_commandos, "icon_url": message.member.avatarURL}, "thumbnail": {"url": this.client.user.dynamicAvatarURL("png", 2048)}}});
+            if (lang === "pt") {
+                let cats = [...new Set(this.client.commands.filter(cmd => cmd.category.pt !== 'Desenvolvedor').map(cmd => cmd.category.pt))];
+                for (const category of cats) {
+                    await channel.createMessage({"embed": {"color": 4360181, "title": [category] + ` (${this.client.commands.filter(cmd => cmd.category.pt === category).length})`, "description": this.client.commands.filter(cmd => cmd.category.pt === category).map(cmd => `\`${prefix + cmd.name}\` \`${cmd.usage || idioma.help.err.no_use}\`\n${cmd.description.pt}`).join("\n")}});
+                }
+            } else {
+                let cats = [...new Set(this.client.commands.filter(cmd => cmd.category.en !== 'Developer').map(cmd => cmd.category.en))];
+                for (const category of cats) {
+                    await channel.createMessage({"embed": {"color": 4360181, "title": [category] + ` (${this.client.commands.filter(cmd => cmd.category.en === category).length})`, "description": this.client.commands.filter(cmd => cmd.category.en === category).map(cmd => `\`${prefix + cmd.name}\` \`${cmd.usage || idioma.help.err.no_use}\`\n${cmd.description.en}`).join("\n")}});
+                }
+            }
 
         } else if (args[0]) {
             const command = this.client.commands.get(args[0]) || this.client.commands.aliases.get(args[0]);

@@ -35,7 +35,11 @@ class Userinfo extends CommandStructure {
             const id = message.mentions[0].id;
             user = await this.client.getRESTGuildMember(message.channel.guild.id, id);
         } else if (args[0]) {
-            user = await this.client.getRESTGuildMember(message.channel.guild.id, args[0]);
+            try {
+                user = await this.client.getRESTGuildMember(message.channel.guild.id, args[0]);
+            } catch {
+                message.channel.createMessage(idioma.userinfo.x)
+            }
         } else {
             user = message.member;
         }
