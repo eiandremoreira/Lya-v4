@@ -1,6 +1,5 @@
 const {CommandStructure} = require("../../handler_comandos/index");
 const {get} = require("quick.db");
-const { MessageEmbed } = require("discord.js");
 
 class Ajuda extends CommandStructure {
     constructor(client) {
@@ -32,13 +31,11 @@ class Ajuda extends CommandStructure {
 
         if (args[0] === "dm" || !args[0]) {
 
-            let embedBase = new MessageEmbed()
-
             var channel = "";
             if (args[0] === "dm") {
                 try {
                     channel = await this.client.getDMChannel(message.member.id);
-                    if (channel.createMessage({"embed": embedBase})) message.channel.createMessage("<:aqua_ok:833516112884662272> Verifique sua dm.")
+                    message.channel.createMessage("<:aqua_ok:833516112884662272> Verifique sua dm.")
                 } catch (e) {
                     return message.channel.createMessage("Sua dm está fechada por favor deixe ela aberta!")
                 }
