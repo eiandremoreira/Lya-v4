@@ -1,7 +1,7 @@
-import Eris = require("eris");
-import CommandHandler = require("./commands/CommandHandler");
-import EventHandler = require("./events/EventHandler");
-export declare class Client extends Eris.Client {
+import { Client } from "eris";
+import * as CommandHandler from "./commands/CommandHandler";
+import * as EventHandler from "./events/EventHandler";
+export declare class Client extends Client {
     commands: CommandHandler;
     listener: EventHandler;
     constructor(options: Options);
