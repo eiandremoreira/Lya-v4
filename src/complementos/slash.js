@@ -1,6 +1,7 @@
 const Eris = require("eris");
 const {get} = require("quick.db");
-
+const DatabaseManager = require('denky-database')
+const Database = new DatabaseManager('./src/complementos/db.json'); 
 // Créditos Veric#0311 por fazer a base ;);
 
 module.exports = async (client) => {
@@ -86,9 +87,6 @@ module.exports = async (client) => {
          const msg = new Eris.Message(interaction, client);
 
          const idioma = require(`../idiomas/${get(`Idioma_${interaction.member.user.id}`) || get(`Idioma_${msg.channel.guild.id}`) || "pt"}`);
-         const DatabaseManager = require('denky-database')
-
-         const Database = new DatabaseManager('./src/complementos/db.json'); 
          const prefix = Database.get(`Prefix.${msg.channel.guild.id}`) ? Database.get(`Prefix.${msg.channel.guild.id}`) : "lya!"; 
 
          await client.requestHandler.request("POST", `/interactions/${interaction.id}/${interaction.token}/callback`, false, {
