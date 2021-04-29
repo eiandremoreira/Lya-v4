@@ -2,6 +2,7 @@ const {CommandStructure} = require("../../handler_comandos/index");
 const {get} = require("quick.db");
 const LyaEmbedBuilder = require("../../complementos/EmbedBuilder/LyaEmbedBuilder");
 const {removeAcents} = require("../../complementos/util");
+const isPlaying = new Set();
 
 class Akinator extends CommandStructure {
     constructor(client) {
@@ -21,17 +22,21 @@ class Akinator extends CommandStructure {
     async run(message, args, idioma) {
         const lang = get(`Idioma_${message.member.id}`) || get(`Idioma_${message.channel.guild.id}`) || "pt";
 
+        if (isPlaying.has(message.author.id)) return message.channel.createMessage(idioma.akinator.warn);
+
         const { Aki } = require('aki-api');
 
         const aki = new Aki(lang);
 
         await aki.start();
 
+        isPlaying.add(message.member.id);
+
         var descoberto = false;
         var pergunta = false;
         var win = false;
 
-        message.channel.createMessage(new LyaEmbedBuilder().description(`${aki.question}\n\n**${aki.answers.map(a => a).join(" | ")}**`).title(`Questão ${aki.currentStep + 1}`).thumbnail("https://www4.minijuegosgratis.com/v3/games/thumbnails/204989_7_sq.jpg").color(this.client.embedColor).create).then(async (akinator) => {
+        message.channel.createMessage(new LyaEmbedBuilder().description(`${aki.question}\n\n**${aki.answers.map(a => a).join(" | ")}**`).title(`${idioma.akinator.question} ${aki.currentStep + 1}`).thumbnail("https://www4.minijuegosgratis.com/v3/games/thumbnails/204989_7_sq.jpg").color(this.client.embedColor).create).then(async (akinator) => {
             this.client.on('messageCreate', async (msg) => {
                 if (!msg.author.id === message.author.id) return;
                 if (!msg.channel.id === message.channel.id) return;
@@ -51,11 +56,13 @@ class Akinator extends CommandStructure {
                                 if (["sim", "s", "yes", "y"].some(s => s === winner.content.toLowerCase())) {
                                     win = true;
                                     await winner.channel.deleteMessage(winner.id);
-                                    return akiWinner.edit(new LyaEmbedBuilder().title("Hahahahha, venci mais uma vez!").description(":heart: Amo jogar com você!").color(this.client.embedColor).create);
+                                    isPlaying.delete(message.member.id);
+                                    return akiWinner.edit(new LyaEmbedBuilder().title(idioma.akinator.winner.title).description(idioma.akinator.winner.desc).color(this.client.embedColor).create);
                                 } else if (["nao", "n", "no"].some(n => n === removeAcents(winner.content.toLowerCase()))) {
                                     win = true;
                                     await msg.channel.deleteMessage(msg.id);
-                                    return akiWinner.edit(new LyaEmbedBuilder().title("Perdi :(").description("Você é mesmo bom!").color(this.client.embedColor).create);
+                                    isPlaying.delete(message.member.id);
+                                    return akiWinner.edit(new LyaEmbedBuilder().title(idioma.akinator.loser.title).description(idioma.akinator.loser.desc).color(this.client.embedColor).create);
                                 }
                             })
                         })
@@ -87,13 +94,16 @@ class Akinator extends CommandStructure {
                     }
     
                     if (answer === 6) return;
-                    if (answer === 5) return descoberto = true;
+                    if (answer === 5) {
+                        descoberto = true;
+                        akinator.edit(new LyaEmbedBuilder().title(idioma.akinator.end).create);
+                    }
 
                     pergunta = true;
 
                     await aki.step(answer).then(async () => {
                         await msg.channel.deleteMessage(msg.id);
-                        akinator.edit(new LyaEmbedBuilder().description(`${aki.question}\n\n**${aki.answers.map(a => a).join(" | ")}**`).title(`Questão ${aki.currentStep + 1}`).thumbnail("https://www4.minijuegosgratis.com/v3/games/thumbnails/204989_7_sq.jpg").color(this.client.embedColor).create).then(async () => {
+                        akinator.edit(new LyaEmbedBuilder().description(`${aki.question}\n\n**${aki.answers.map(a => a).join(" | ")}**`).title(`${idioma.akinator.question} ${aki.currentStep + 1}`).thumbnail("https://www4.minijuegosgratis.com/v3/games/thumbnails/204989_7_sq.jpg").color(this.client.embedColor).create).then(async () => {
                             pergunta = false;                        
                         });
                     });
