@@ -225,6 +225,19 @@ module.exports = {
         e: "e",
         txt: "Olá {user}! Meu nome neste servidor é **{client.name}**, eu tenho **15** anos.\n\n> Atualmente tenho **{commands}** comandos, estou atualmente em **{servers}** servidores, com **{users}** usuários!\n\n> Eu fui criada em <:javascript:813113701091377162>[JavaScript](https://developer.mozilla.org/docs/Web/JavaScript) utilizando <:eris:836351428226056232>[Eris](https://abal.moe/Eris/).\n> Para ver minha lista de comandos use `{prefix}help`.\n\nVocê sabia que fazem **{uptime}** que estou acordada?"
     },
+    akiantor: {
+        question: "Questão",
+        end: "Jogo encerrado!",
+        warn: ":x: Você já está jogando!\n:warning: Escreva `stop` no chat, para encerrar o jogo!",
+        winner: {
+            title: "Hahahahha, venci mais uma vez!",
+            desc: ":heart: Amo jogar com você!"
+        },
+        loser: {
+            title: "Perdi :(",
+            desc: "Você é realmente bom!"
+        }
+    },
     permissions: {
         P1: "Criar convites instantâneos",
         P2: "Expulsar Membros",

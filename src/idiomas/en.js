@@ -224,6 +224,19 @@ module.exports = {
         e: "and",
         txt: "Hello {user}! My name in this guild is **{client.name}**, i have **15** years old.\n\n> I currently have **{commands}** commands, i am currently in **{servers}** guild, with **{users}** users!\n\n> I was created in <:javascript:813113701091377162>[JavaScript](https://developer.mozilla.org/docs/Web/JavaScript) using <:eris:836351428226056232>[Eris](https://abal.moe/Eris/).\n> To view mt command list use `{prefix}help`.\n\nDid you know they do **{uptime}** that I'm awake?"
     },
+    akiantor: {
+        question: "Question",
+        end: "Game ended!",
+        warn: ":x: You're already playing!\n:warning: Write `stop` in the chat, to end game!",
+        winner: {
+            title: "Hahahahha, I won again!",
+            desc: ":heart: I love to play with you!"
+        },
+        loser: {
+            title: "I've lost :(",
+            desc: "You are really good!"
+        }
+    },
     permissions: {
         P1: "Create instant invitations",
         P2: "Kick Members",
