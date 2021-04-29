@@ -14,9 +14,7 @@ class Bot_Chan extends require("../handler_comandos/index").Client {
  // Criação do Client
  const client = new Bot_Chan(`Bot ${require("../jsons/client.config.json").token}`, {
     restMode: true,
-    ws: {
-      intents: 1667
-    }
+    intents: 1667
  })
 
  // Comandos Slash
