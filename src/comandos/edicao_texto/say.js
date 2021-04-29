@@ -20,8 +20,9 @@ class Say extends CommandStructure {
             }
         }) 
     }
-    async run(message, args) {
-        let texto = args.slice(0).join(" ");
+    async run(message, args, idioma, prefix, db, slash) {
+        let texto = message.content.slice(prefix.length).trim().split(/ +/g).slice(1).join(" ");
+        if (slash) texto = args.slice(0);
         message.channel.createMessage(`✍️ ${message.member}\n\n${texto}`)
     }
 }

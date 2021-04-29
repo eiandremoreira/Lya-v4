@@ -14,7 +14,8 @@ class Prefix extends CommandStructure {
             userPermissions: ["manageGuild"],
             args: {
                 o: 1,
-                n: 0
+                n: 0,
+                c: 1
             },
             description: {
                 pt: "Mude meu prefixo no servidor!",

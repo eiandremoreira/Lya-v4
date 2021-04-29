@@ -4,13 +4,13 @@ class Balance extends CommandStructure {
     constructor(client) {
         super(client, {
             name: "balance",
-            aliases: ["saldo"],
+            aliases: ["saldo", "bal", "atm"],
             cooldown: 15000,
             args: {
-                o: 0,
-                n: 1
+                n: 1,
+                m: 1
             },
-            usages: [
+            examples: [
                 "balance",
                 "balance <@!757928932199891094>",
                 "balance 757928932199891094"
@@ -37,7 +37,7 @@ class Balance extends CommandStructure {
         }
 
         const money = db.get(`Money.${user.id}`) ? db.get(`Money.${user.id}`) : 0;
-        const bank = db.get(`Money.Bank.${user.id}`) ? db.get(`Money.Bank.${user.id}`) : 0;
+        const bank = db.get(`Money/Bank.${user.id}`) ? db.get(`Money/Bank.${user.id}`) : 0;
 
         message.channel.createMessage({
             "embed": {
@@ -49,12 +49,12 @@ class Balance extends CommandStructure {
                 "fields": [
                     {
                         "name": idioma.balance.wallet,
-                        "value": `${money} :yen:`,
+                        "value": `${money.toLocaleString()} :yen:`,
                         "inline": true
                     },
                     {
                         "name": idioma.balance.bank,
-                        "value": `${bank} :yen:`,
+                        "value": `${bank.toLocaleString()} :yen:`,
                         "inline": true
                     }
                 ],

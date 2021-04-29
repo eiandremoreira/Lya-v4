@@ -15,11 +15,15 @@ class Nitro_Pobre extends CommandStructure {
             },
             cooldown: 20000,
             usage: "<on/off>",
-            usages: [
+            examples: [
                 "nitro_pobre",
                 "nitro_pobre on",
                 "nitro_pobre off"
             ],
+            args: {
+                c: 1,
+                n: 1
+            },
             clientPermissions: ["manageWebhooks"],
             userPermissions: ["manageGuild", "manageMessages"]
         })

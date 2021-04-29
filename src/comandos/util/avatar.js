@@ -14,7 +14,7 @@ class Avatar extends CommandStructure {
                 pt: "Veja o avatar de alguém!",
                 en: "See someone's avatar!"
             },
-            usages: [
+            examples: [
                 "avatar <@757928932199891094>",
                 "avatar 757928932199891094"
             ],
@@ -35,7 +35,7 @@ class Avatar extends CommandStructure {
             user = message.member;
         }
 
-        const avatar = await user.avatarURL.replace("?size=128", "?size=2048");
+        const avatar = await user.avatarURL.replace("?size=128", "?size=2048").replace("jpg", "png");
 
         message.channel.createMessage({"content": message.member, 
         "embed": {

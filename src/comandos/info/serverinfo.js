@@ -17,17 +17,17 @@ class Serverinfo extends CommandStructure {
                 pt: "ℹ️ Informação",
                 en: "ℹ️ Information"
             },
-            usages: [
+            examples: [
                 "serverinfo",
                 "serverinfo 779667611235123221"
             ],
             args: {
-                o: 0,
+                c: 1,
                 n: 1
             }
         })
     }
-    async run(message, args, idioma, prefix, db) {
+    async run(message, args, idioma) {
         var guild = {};
 
         if (args[0]) {
@@ -44,8 +44,8 @@ class Serverinfo extends CommandStructure {
         const icon = guild.iconURL;
         const members = guild.memberCount;
         const splash = guild.splashURL;
-        const region = guild.region;
-        const verif = guild.verificationLevel;
+        const regiao = guild.region;
+        const veri = guild.verificationLevel;
         const emojis = await guild.emojis.length;
         const roles = await guild.roles.filter(x => x).map(x => x.name).join(", ");
         const rolesCount = await guild.roles.filter(x => x).length;
@@ -55,9 +55,72 @@ class Serverinfo extends CommandStructure {
         const criado = parseMilliseconds(await toFinite(guild.createdAt - Date.now()));
         const data_entrada = moment.utc(guild.joinedAt).tz(`${lang}`.replace("pt", "America/Sao_Paulo").replace("en", "America/New_Work")).format("LLLL");
         const entrada = parseMilliseconds(await toFinite(guild.joinedAt - Date.now()));
+
+        var region;
+        var verif;
+        let pais = idioma.serverinfo.regiao;
+
+        switch (veri) {
+            case 0:
+                verif = idioma.serverinfo.verification.none
+                break;
+            case 1:
+                verif = idioma.serverinfo.verification.low
+                break;
+            case 2:
+                verif = idioma.serverinfo.verification.medium
+                break;
+            case 3:
+                verif = idioma.serverinfo.verification.high
+                break;
+            case 4:
+                verif = idioma.serverinfo.verification.highest
+                break;
+        }
+        switch (regiao) {
+            case "europe":
+                region = '🇪🇺 ' + pais.eu;
+                break;
+            case "brazil":
+                region = ':flag_br: ' + pais.br;
+                break;
+            case "india":
+                region = ':flag_in: ' + pais.in;
+                break;
+            case "southafrica":
+                region = ':flag_za: ' + pais.sf;
+                break;
+            case "sydney":
+                region = ':flag_au: Sydney';
+                break;
+            case "singapore":
+                region = ':flag_sg: ' + pais.sg;
+                break;
+            case "russia":
+                region = ':flag_ru: ' + pais.ru;
+                break;
+            case "japan":
+                region = ':flag_jp: ' + pais.jp
+                break;
+            case "hongkong":
+                region = ':flag_hk: ' + pais.hk
+                break;
+            case "us-east":
+                region = '🇺🇸 ' + pais.us;
+                break;
+            case "us-west":
+                region = '🇺🇸 ' + pais.us;
+                break;
+            case "us-south":
+                region = '🇺🇸 ' + pais.us;
+                break;
+            case "us-central":
+                region = '🇺🇸 ' + pais.us;
+                break;
+        }
         message.channel.createMessage({
             "embed": {
-                "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790,
+                "color": this.client.embedColor,
                 "thumbnail": {
                     "url": icon
                 },
@@ -66,7 +129,7 @@ class Serverinfo extends CommandStructure {
                 },
                 "fields": [
                     {
-                        "name": ":face_with_monocle:"+idioma.serverinfo.name,
+                        "name": ":face_with_monocle: "+idioma.serverinfo.name,
                         "value": name,
                         "inline": true
                     },

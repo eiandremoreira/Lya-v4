@@ -22,37 +22,25 @@ class Daily extends CommandStructure {
     }
     async run(message, args, idioma, prefix, db) {
         const data = parseInt(utc(Date.now()).format("DD"));
-        const data_ms = Date.now();
         const data_db = db.get(`Daily.Day.${message.member.id}`) ? db.get(`Daily.Day.${message.member.id}`) : 0;
 
-        if (data > data_db) {
-            db.set(`Daily.Day.${message.member.id}`, data);
-            db.set(`Daily.Ms.${message.member.id}`, data_ms);
-        }
-        const tempo = parseMilliseconds(db.get(`Daily.Ms.${message.member.id}`) - (Date.now() - db.get(`Daily.Ms.${message.member.id}`)));
-        if (data === !data_db) return message.channel.createMessage({content: `<:malFubukiSTOP:831987216300376074> Qual é meno espera ai na moralzinha beleuza?\n**Tempo:** \`${tempo.hours}\`, \`${tempo.minutes}\`, \`${tempo.seconds}\``, messageReferenceID: message.id });
+        const tempo = parseMilliseconds(86400000 - (Date.now() - db.get(`Daily.Ms.${message.member.id}`)));
+        if (db.get(`Daily.Ms.${message.member.id}`) !== null && 86400000 - (Date.now() - db.get(`Daily.Ms.${message.member.id}`)) > 0) return message.channel.createMessage({content: idioma.daily.x.replace("{h}", tempo.hours+"h").replace("{m}", tempo.minutes+"m").replace("{s}", tempo.seconds+"s"), messageReferenceID: message.id });
+       
+        db.set(`Daily.Ms.${message.member.id}`, Date.now());
 
         let quantia = Math.floor(Math.random() * (20000 - 7000)) + 7000;
 
         if (!db.get(`Money.${message.member.id}`)) {
-            await db.set(`Money.${message.member.id}`, 0);
-            db.add(`Money.${message.member.id}`, quantia);
+            await db.set(`Money.${message.member.id}`, quantia);
         } else {
             db.add(`Money.${message.member.id}`, quantia);
         }
-
-        /**
-         *         
-         * {
-            file: await read("./src/images/a.jpg"),
-            name: "presente.jpg",
-        }
-         */
         
-        message.channel.createMessage(`${message.member}\nParabéns você pegou seu prêmio diário e recebeu **${quantia}** :yen:\nVolte amanhã para receber seu prêmio novamente <a:yay:832444773407260692>`, 
+        message.channel.createMessage(`${message.member}\n${idioma.daily.txt}`.replace("{quantia}", quantia.toLocaleString()), 
         {
             file: await read("./src/images/a.jpg"),
-            name: "presente.jpg",
+            name: "daily.jpg",
         })
 
     }

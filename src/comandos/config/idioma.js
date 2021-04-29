@@ -10,9 +10,10 @@ class Idioma extends CommandStructure {
             args: {
                 o: 1,
                 n: 2,
+                c: 2
             },
             cooldown: 12000,
-            usages: [
+            examples: [
                 "idioma pt",
                 "idioma en",
                 "idioma me pt",

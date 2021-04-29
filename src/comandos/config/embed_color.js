@@ -9,11 +9,11 @@ class Embed_Color extends CommandStructure {
             userPermissions: ["manageMessages"],
             args: {
                 o: 1,
-                n: 0
+                c: 1
             },
             usage: "<hex>",
-            usages: [
-                "embeds_colors #8cb8ff"
+            examples: [
+                "embeds_color #8cb8ff"
             ],
             category: {
                 pt: "⚙️ Configuração",

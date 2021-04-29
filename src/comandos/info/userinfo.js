@@ -13,7 +13,7 @@ class Userinfo extends CommandStructure {
                 pt: "Veja as informações de um usuário!",
                 en: "See a user's information!"
             },
-            usages: [
+            examples: [
                 "userinfo",
                 "userinfo <@!757928932199891094>",
                 "userinfo 757928932199891094"
@@ -24,11 +24,11 @@ class Userinfo extends CommandStructure {
             },
             args: {
                 n: 1,
-                o: 0
+                m: 1
             }
         })
     }
-    async run(message, args, idioma, prefix, db) {
+    async run(message, args, idioma) {
         var user = {};
 
         if (message.mentions[0]) {
@@ -90,7 +90,7 @@ class Userinfo extends CommandStructure {
     for (permsIndex=0; permsIndex<permissionsArray.length; permsIndex++) {
         if (!user.bot) {
             if (user.permissions.has(permissionsArray[permsIndex][0])) {
-                permissionsMap += permissionsArray[permsIndex][1]+", ";
+                permissionsMap += "`"+permissionsArray[permsIndex][1]+"` ";
             } else {
                 permissionsMap += '';
             }
@@ -132,10 +132,10 @@ class Userinfo extends CommandStructure {
                     },
                     {
                         "name": idioma.userinfo.permissions,
-                        "value": `\`\`\`${permissionsMap || "?"}\`\`\``.replace("undefined", "")
+                        "value": `${permissionsMap || "?"}`.replace("undefined", "")
                     }
                 ],
-                "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790
+                "color": this.client.embedColor
             }
         })
     }

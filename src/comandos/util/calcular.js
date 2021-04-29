@@ -12,7 +12,7 @@ class Calculadora extends CommandStructure {
                 o: 3
             },
             usage: "<num1> <sinal> <num2>",
-            usages: [
+            examples: [
                 "calculadora 1 + 1",
                 "calculadora 1 - 1",
                 "calculadora 1 * 1",
@@ -23,6 +23,10 @@ class Calculadora extends CommandStructure {
             description: {
                 pt: "Faça uma conta de matemática",
                 en: "Make math account"
+            },
+            args: {
+                o: 3,
+                c: 3
             },
             category: {
                 pt: "🔩 Util",
@@ -59,7 +63,7 @@ class Calculadora extends CommandStructure {
             case "%":
                 conta = calc.porcentagem(parseFloat(args[0]), parseFloat(args[2]));
                 break;
-            case !["+", "-", "/", "*", "^", "%", "i"].some(a => a === args[0]):
+            default:
                 return message.channel.createMessage(idioma.calculadora.x);
                 break;
         }

@@ -1,5 +1,4 @@
 const { CommandStructure } = require("../../handler_comandos/index");
-const {ReactionCollector} = require('eris-collector');
 
 const timer = new Set();
 
@@ -24,16 +23,16 @@ class Raspadinha extends CommandStructure {
         var reload = false;
         let money = db.get(`Money.${message.member.id}`) ? db.get(`Money.${message.member.id}`) : 0;
 
-        if (money < 5000) return message.channel.createMessage({
+        if (money < 2500) return message.channel.createMessage({
             "embed": {
                 "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790,
                 "description": idioma.raspadinha.err.err1
             }
         });
         
-        if (money >= 5000) db.remove(`Money.${message.member.id}`, 5000);
+        if (money >= 2500) db.remove(`Money.${message.member.id}`, 2500);
 
-        let emojis = ["<:cadelito:826291935550767134>", "<a:tlHype:826657934523105290>", "<:marcos:826221016236687490>", "<:okay:826582713724305510>", "<:vem:827061080802328596>"];
+        let emojis = ["<:PES_Angery:833871352242634782>", "<a:CalcinhaCa:833870472344109058>", "<:marcos:826221016236687490>", "<:aqua_ok:833516112884662272>", "<:LoliPolici:833871080254210058>"];
 
         let emoji1 = emojis[Math.floor(Math.random() * emojis.length)];
         let emoji2 = emojis[Math.floor(Math.random() * emojis.length)];
@@ -45,7 +44,7 @@ class Raspadinha extends CommandStructure {
         let emoji8 = emojis[Math.floor(Math.random() * emojis.length)];
         let emoji9 = emojis[Math.floor(Math.random() * emojis.length)];
 
-        let msg = await message.channel.createMessage({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.desc1, "fields": [{"name": idioma.raspadinha.desc2, "value": "||"+emoji1+"||"+"||"+emoji2+"||"+"||"+emoji3+"||"+"\n"+"||"+emoji4+"||"+"||"+emoji5+"||"+"||"+emoji6+"||"+"\n"+"||"+emoji7+"||"+"||"+emoji8+"||"+"||"+emoji9+"||", "inline": true}, {"name": "Valores", "value": "<:cadelito:826291935550767134> -> 1,000 💴\n<:marcos:826221016236687490> -> 5,000 💴\n<:vem:827061080802328596> -> 6,000 💴\n<:okay:826582713724305510> -> 10,000 💴\n<a:tlHype:826657934523105290> -> 50,000 💴", "inline": true}]}})
+        let msg = await message.channel.createMessage({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.desc1, "fields": [{"name": idioma.raspadinha.desc2, "value": "||"+emoji1+"||"+"||"+emoji2+"||"+"||"+emoji3+"||"+"\n"+"||"+emoji4+"||"+"||"+emoji5+"||"+"||"+emoji6+"||"+"\n"+"||"+emoji7+"||"+"||"+emoji8+"||"+"||"+emoji9+"||", "inline": true}, {"name": "Valores", "value": "<:PES_Angery:833871352242634782> -> 1,000 💴\n<:marcos:826221016236687490> -> 5,000 💴\n<:LoliPolici:833871080254210058> -> 6,000 💴\n<:aqua_ok:833516112884662272> -> 25,000 💴\n<a:CalcinhaCa:833870472344109058> -> 50,000 💴", "inline": true}]}})
 
         let ms = await message.channel.createMessage({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.msg1}})
         var value = {};
@@ -66,7 +65,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -82,7 +81,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -98,7 +97,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -114,7 +113,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -130,7 +129,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -146,7 +145,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -162,7 +161,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -178,7 +177,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -194,7 +193,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -210,7 +209,7 @@ class Raspadinha extends CommandStructure {
                 } else if (emoji === emojis[2]) {
                     value.n3 = 5000;
                 } else if (emoji === emojis[3]) {
-                    value.n4 = 10000;
+                    value.n4 = 25000;
                 } else if (emoji === emojis[4]) {
                     value.n5 = 6000;
                 }
@@ -236,16 +235,16 @@ class Raspadinha extends CommandStructure {
                             reload = true;
                             let money1 = db.get(`Money.${message.member.id}`) ? db.get(`Money.${message.member.id}`) : 0;
 
-                            if (money1 < 5000) return message.channel.createMessage({
+                            if (money1 < 2500) return message.channel.createMessage({
                                 "embed": {
                                     "color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790,
                                     "description": idioma.raspadinha.err.err1
                                 }
                             });
 
-                            if (money1 >= 5000) db.remove(`Money.${message.member.id}`, 5000);
+                            if (money1 >= 2500) db.remove(`Money.${message.member.id}`, 2500);
 
-                            let emojis = ["<:cadelito:826291935550767134>", "<a:tlHype:826657934523105290>", "<:marcos:826221016236687490>", "<:okay:826582713724305510>", "<:vem:827061080802328596>"];
+                            let emojis = ["<:PES_Angery:833871352242634782>", "<a:CalcinhaCa:833870472344109058>", "<:marcos:826221016236687490>", "<:aqua_ok:833516112884662272>", "<:LoliPolici:833871080254210058>"];
 
                             let emoji1 = emojis[Math.floor(Math.random() * emojis.length)];
                             let emoji2 = emojis[Math.floor(Math.random() * emojis.length)];
@@ -257,7 +256,7 @@ class Raspadinha extends CommandStructure {
                             let emoji8 = emojis[Math.floor(Math.random() * emojis.length)];
                             let emoji9 = emojis[Math.floor(Math.random() * emojis.length)];
                     
-                            await msg.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.desc1, "fields": [{"name": idioma.raspadinha.desc2, "value": "||"+emoji1+"||"+"||"+emoji2+"||"+"||"+emoji3+"||"+"\n"+"||"+emoji4+"||"+"||"+emoji5+"||"+"||"+emoji6+"||"+"\n"+"||"+emoji7+"||"+"||"+emoji8+"||"+"||"+emoji9+"||", "inline": true}, {"name": "Valores", "value": "<:cadelito:826291935550767134> -> 1,000 💴\n<:marcos:826221016236687490> -> 5,000 💴\n<:vem:827061080802328596> -> 6,000 💴\n<:okay:826582713724305510> -> 10,000 💴\n<a:tlHype:826657934523105290> -> 50,000 💴", "inline": true}]}})
+                            await msg.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.desc1, "fields": [{"name": idioma.raspadinha.desc2, "value": "||"+emoji1+"||"+"||"+emoji2+"||"+"||"+emoji3+"||"+"\n"+"||"+emoji4+"||"+"||"+emoji5+"||"+"||"+emoji6+"||"+"\n"+"||"+emoji7+"||"+"||"+emoji8+"||"+"||"+emoji9+"||", "inline": true}, {"name": "Valores", "value": "<:PES_Angery:833871352242634782> -> 1,000 💴\n<:marcos:826221016236687490> -> 5,000 💴\n<:LoliPolici:833871080254210058> -> 6,000 💴\n<:aqua_ok:833516112884662272> -> 25,000 💴\n<a:CalcinhaCa:833870472344109058> -> 50,000 💴", "inline": true}]}})
                     
                             var value = {};
                     
@@ -277,7 +276,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -293,7 +292,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -309,7 +308,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -325,7 +324,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -341,7 +340,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -357,7 +356,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -373,7 +372,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -389,7 +388,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -405,7 +404,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -421,7 +420,7 @@ class Raspadinha extends CommandStructure {
                                     } else if (emoji === emojis[2]) {
                                         value.n3 = 5000;
                                     } else if (emoji === emojis[3]) {
-                                        value.n4 = 10000;
+                                        value.n4 = 25000;
                                     } else if (emoji === emojis[4]) {
                                         value.n5 = 6000;
                                     }
@@ -446,10 +445,11 @@ class Raspadinha extends CommandStructure {
                                             if (e.name === "✅") {
                                                 reacted = true;
                                                 if (conta5 === "0" || conta5 === 0) {
-                                                    db.remove(`Money.${message.member.id}`, 10000);
+                                                    await db.remove(`Money.${message.member.id}`, 10000);
                                                     return ms.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.txt1}})
                                                 } else {
-                                                    ms.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.txt2.replace("{user}", message.member).replace("{conta}", conta.toLocaleString())}});
+                                                    await db.add(`Money.${message.member.id}`, conta5);
+                                                    ms.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.txt2.replace("{user}", message.member).replace("{conta}", await conta5.toLocaleString())}});
                                                 }
                                             } 
                                         }
@@ -468,10 +468,11 @@ class Raspadinha extends CommandStructure {
                         if (e.name === "✅") {
                             reacted = true;
                             if (conta === 0 || conta === "0") {
-                                db.remove(`Money.${message.member.id}`, 10000);
+                                await db.remove(`Money.${message.member.id}`, 10000);
                                 return ms.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.txt1}})
                             } else {
-                                ms.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.txt2.replace("{user}", message.member).replace("{conta}", conta.toLocaleString())}});
+                                await db.add(`Money.${message.member.id}`, conta);
+                                ms.edit({"embed": {"color": db.get(`Embeds.colors.${message.channel.guild.id}`) ? db.get(`Embeds.colors.${message.channel.guild.id}`) : 3092790, "description": idioma.raspadinha.txt2.replace("{user}", message.member).replace("{conta}", await conta.toLocaleString())}});
                             }
                         } 
                     }

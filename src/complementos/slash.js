@@ -96,7 +96,7 @@ module.exports = async (client) => {
             }
         })
 
-         return comando.run(msg, args, idioma, prefix, Database)
+        return comando.run(msg, args, idioma, prefix, Database, true)
      }
     })
 }

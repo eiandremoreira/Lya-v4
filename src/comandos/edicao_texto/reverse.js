@@ -1,11 +1,11 @@
 const { CommandStructure } = require("../../handler_comandos/index");
 
-class Clap extends CommandStructure {
+class Reverse extends CommandStructure {
     constructor(client) {
         super(client, {
-            name: "clap",
+            name: "reverse",
+            aliases: ["inverter"],
             usage: "<txt>",
-            aliases: ["palmas"],
             args: {
                 o: 1,
                 n: 0
@@ -15,16 +15,16 @@ class Clap extends CommandStructure {
                 en: "✏️ Text edit"
             },
             description: {
-                pt: "Faça👏um👏texto👏neste👏estilo",
-                en: "Make👏a👏text👏in👏this👏style"
+                pt: "olitse etsen otxet mu açaF",
+                en: "elyts siht ni txet a ekaM"
             }
         }) 
     }
     async run(message, args, idioma, prefix, db, slash) {
-        let texto = message.content.slice(prefix.length).trim().split(/ +/g).slice(1).join("👏");
-        if (slash) texto = args.slice(0).map(a => a.replace(/ +/g, "👏"));
+        let texto = message.content.slice(prefix.length).trim().split(/ +/g).slice(1).join(" ").split("").reverse().join("");
+        if (slash) texto = args.slice(0).map(a => a.split(/ +/g).slice(0).join(" ").split("").reverse().join(""));
         message.channel.createMessage(`✍️ ${message.member}\n\n${texto}`)
     }
 }
 
-module.exports = Clap;
+module.exports = Reverse;
