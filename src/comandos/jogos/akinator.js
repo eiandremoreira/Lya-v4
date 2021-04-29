@@ -96,7 +96,7 @@ class Akinator extends CommandStructure {
                     if (answer === 6) return;
                     if (answer === 5) {
                         descoberto = true;
-                        akinator.edit(new LyaEmbedBuilder().title(idioma.akinator.end).create);
+                        akinator.edit(new LyaEmbedBuilder().title(idioma.akinator.end).color(this.client.embedColor).create);
                     }
 
                     pergunta = true;
