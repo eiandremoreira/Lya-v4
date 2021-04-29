@@ -1,6 +1,7 @@
 module.exports = {
     exe: "Executado por {user}!",
     slash: "<:slash:833031545022578698> Utilizado por {user}!",
+    mention: "<:tl1FlowerBlue:817920797913251850> » Olá {user}! Meu prefixo atual neste servidor é **{prefix}**, use `{prefix}help` para ver minha lista de {commands} comandos!",
     handler: {
         cooldown: "Espere {time} segundo(s) para usar esse comando novamente!",
         no_args: "Parece que está faltando alguns argumentos, para mais informações `{prefix}ajuda {command}`!",
@@ -26,21 +27,24 @@ module.exports = {
         title_commando: "Ajuda de comando.",
         title_category: "Ajuda por categoria.",
         title_commandos: "Lista de comandos.",
-        name: "**Nome**:",
-        category: "**Categoria**:",
-        description: "**Descrição**:",
-        aliases: "**Sinônimos**:",
-        usage: "**Uso**:",
-        usages: "**Usos**:",
-        args: "**Argumentos**:",
+        name: "Nome",
+        category: "Categoria",
+        description: "Descrição",
+        aliases: "Sinônimos",
+        usage: "Uso",
+        examples: "Exemplos",
+        args: "Argumentos",
         args_n: "Opcionais:",
         args_o: "Obrigatórios:",
+        args_r: "Cargos:",
+        args_m: "Menções:",
+        args_c: "Comum:",
         args_t: "Total:",
         err: {
             no_command: "❌ Nenhum comando encontrado com o nome **{name}**!",
             no_desc: "Sem descrição.",
             no_alias: "Sem sinônimos.",
-            no_usages: "Sem usos.",
+            no_examples: "Sem usos.",
             no_use: "Sem uso."
         }
     },
@@ -72,7 +76,18 @@ module.exports = {
             medium: "Médio",
             high: "Alto",
             highest: "Muito Alto"
-        }
+        },
+        regiao: {
+            eu: "Europa",
+            br: "Brasil",
+            in: "Índia",
+            sf: "África do Sul",
+            sg: "Cingapura",
+            ru: "Rússia",
+            jp: "Japão",
+            hk: "Hong Kong",
+            us: "Estados Unidos"
+          }
     },
     raspadinha: {
         desc1: "Será que você vai ganhar alguns premiôs?",
@@ -81,7 +96,7 @@ module.exports = {
         txt1: ":x: Cade a combinação?\nSó de raiva vou pegar 10,000 :yen: de você :rage:",
         txt2: ":tada: Parabéns {user} você ganhou **{conta} :yen:**!",
         err: {
-            err1: ":x: Você precisa de 5,000 💴!",
+            err1: ":x: Você precisa de 2,500 💴!",
             err2: ""
         }
     },
@@ -110,6 +125,105 @@ module.exports = {
     calculadora: {
         txt: "🧐 **Questão:**\n{q}\n\n🤓 **Resposta:**\n{c}",
         x: ":x: Insirá uma conta válida!"
+    },
+    rolldice: {
+        x: ":x: Insirá um número válido para a aposta!",
+        x2: ":x: Insirá um valor de 1 à 12!",
+        x3: ":x: Você não pode apostar com você mesmo!",
+        x4: ":x: Você precisa informar um número para a aposta!",
+        x5: ":x: Você não tem tudo isso de dinheiro para apostar!",
+        x6: ":x: O(a) {user} não tem tudo isso de dinheiro para apostar com você!",
+        txt: "Deseja apostar com você um valor de **{quantia} :yen:**!\nEscreva `Sim <número de 1 à 12>` no chat para aceitar a aposta!",
+        win: "🎲 Lançei os dados!\n\nValor do primeiro dado: **{dado1}**\nValor do segundo dado: **{dado2}**\nTotal: **{total}**\n\nO valor mais proximo foi de {winner}, sendo ele **{value}**"
+    },
+    daily: {
+        txt: "Parabéns você pegou seu prêmio diário e recebeu **{quantia}** :yen:\nVolte amanhã para receber seu prêmio novamente <a:yay:832444773407260692>",
+        x: "<:malFubukiSTOP:831987216300376074> Qual é meno espera ai na moralzinha beleuza?\n**Tempo restante para o próximo daily:** \`{h}\`, \`{m}\`, \`{s}\`"
+    },
+    leaderboard: {
+        loading: "Executando leaderboard...",
+        title: "Top ricos (Global)",
+        footer: "Sua posição no ranking é #"
+    },
+    depositar: {
+        txt: "✅ Foi depositado **{quantia}** :yen:, com sucesso em seu banco!",
+        x: ":x: Você nem tem dinheiro na carteira para depositar.",
+        x1: ":x: Quantia inválida!",
+        x2: ":x: Você não tem tudo isso de dinheiro na carteira!"
+    },
+    sacar: {
+        txt: "✅ Foi sacado **{quantia}** :yen:, com sucesso do seu banco!",
+        x: ":x: Você nem tem dinheiro no banco para depositar.",
+        x1: ":x: Quantia inválida!",
+        x2: ":x: Você não tem tudo isso de dinheiro no banco!"
+    },
+    pagar: {
+        x: ":x: Você não tem tudo isso de dinheiro na carteira ou no banco!",
+        txt: "✅ Você pagou **{quantia}**, para {user}!"
+    },
+    anime: {
+        loading: "",
+        fields: [
+            "✅ Avaliação",
+            "🏆 Rank",
+            "💓 Popularidade",
+            "⭐ Favoritos",
+            "💁 Status",
+            "🤔 Tipo de exibição",
+            "📺 Episódios",
+            "⏲️ Duração dos episódios",
+            "📆 Estreou",
+            "📆 Terminou",
+            "⚠️ Classificação de idade"
+        ],
+        errs: [
+            "Data não identificada",
+            "Anime em Exibição",
+            "Tempo não identificado",
+            "Favoritos não identificados"
+        ],
+        texts: [
+            "Em Exibição",
+            "Finalizado",
+            "Não Lançado",
+            "Próximo do lançamento",
+            "Sem informação"
+        ],
+        restrict: [
+            "Orientação parental sugerida",
+            "Audiência Geral",
+            "Conteúdo Explícito",
+            "Restrito"
+        ]
+    },
+    aniversario: {
+        txt: "✅ Quem nasceu em `{data}`, tem **{input}** anos!",
+        err: ":x: Formato de data inválido!\n**Formato correto**: `<dia>`/`<mês>`/`<ano>`"
+    },
+    ocr: {
+        err: ":x: URL de imagem inválida!"
+    },
+    addemoji: {
+        err: [
+            ":x: Emoji inválido!",
+            ":x: Utilize link apenas de https://imgur.com/ e https://discord.com/!"
+        ]
+    },
+    level: {
+        status: [
+            "✅ Sistema de level ativado!",
+            "✅ Sistema de level desativado!",
+            "✅ Agora as mensagens de level Up serão enviadas em **{canal}**!"
+        ],
+        txt: "ℹ️ O nível atual de **{user}** no servidor é **{level}**!\n🌐 Nível global: **{level2}**",
+        err: ":x: Você não tem permissão para configurar o sistema de level!",
+        err2: ":x: Canal inválido!",
+        up: "🆙 Parabéns {user}, você subiu para o nível **{level}**!"
+    },
+    botinfo: {
+        title: "<a:tlPaiNom:813102166885138484> Minhas informações",
+        e: "e",
+        txt: "Olá {user}! Meu nome neste servidor é **{client.name}**, eu tenho **15** anos.\n\n> Atualmente tenho **{commands}** comandos, estou atualmente em **{servers}** servidores, com **{users}** usuários!\n\n> Eu fui criada em <:javascript:813113701091377162>[JavaScript](https://developer.mozilla.org/docs/Web/JavaScript) utilizando <:eris:836351428226056232>[Eris](https://abal.moe/Eris/).\n> Para ver minha lista de comandos use `{prefix}help`.\n\nVocê sabia que fazem **{uptime}** que estou acordada?"
     },
     permissions: {
         P1: "Criar convites instantâneos",

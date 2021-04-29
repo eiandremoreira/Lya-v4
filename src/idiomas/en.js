@@ -1,6 +1,7 @@
 module.exports = {
     exe: "Run by {user}!",
     slash: "<:slash:833031545022578698> Used by {user}!",
+    mention: "<:tl1FlowerBlue:817920797913251850> » Hello {user}! My current prefix on this server is ** {prefix}**, use `{prefix}help` to see my {commands} commands!",
     handler: {
         cooldown: "Wait {time} second(s) to use this command again!",
         no_args: "It seems that some arguments are missing, for more information `{prefix}help {command}`!",
@@ -26,21 +27,24 @@ module.exports = {
         title_commando: "Command help.",
         title_category: "Help by category.",
         title_commandos: "Command list.",
-        name: "**Name**:",
-        category: "**Category**:",
-        description: "**Description**:",
-        aliases: "**Aliases**:",
-        usage: "**Usage**:",
-        usages: "**Usages**:",
-        args: "**Arguments**:",
+        name: "Name",
+        category: "Category",
+        description: "Description",
+        aliases: "Aliases**:",
+        usage: "Usage",
+        examples: "Examples",
+        args: "Arguments",
         args_n: "Optional:",
         args_o: "Mandatory:",
+        args_r: "Roles:",
+        args_m: "Mentions:",
+        args_c: "Common:",
         args_t: "Total:",
         err: {
             no_command: "❌ No commands found with name **{name}**!",
             no_desc: "No description.",
             no_alias: "No aliases.",
-            no_usages: "No usages.",
+            no_examples: "No examples.",
             no_use: "No usage."
         }
     },
@@ -72,7 +76,18 @@ module.exports = {
             medium: "Medium",
             high: "High",
             highest: "Highest"
-        }
+        },
+        regiao: {
+            eu: "Europe",
+            br: "Brazil",
+            in: "India",
+            sf: "South Africa",
+            sg: "Singapore",
+            ru: "Russia",
+            jp: "Japan",
+            hk: "Hong Kong",
+            us: "United States"
+          }
     },
     raspadinha: {
         desc1: "Will you win some prizes?",
@@ -81,7 +96,7 @@ module.exports = {
         txt1: ":x: Where's the combination?\nOnly in anger will I catch 10,000 :yen: of you :rage:",
         txt2: ":tada: Congratulations {user} you win **{conta} :yen:**!",
         err: {
-            err1: ":x: You need 5,000 💴 to purchase a scratch card!",
+            err1: ":x: You need 2,500 💴 to purchase a scratch card!",
             err2: ""
         }
     },
@@ -110,6 +125,104 @@ module.exports = {
     calculadora: {
         txt: "🧐 **Question:**\n{q}\n\n🤓 **Result:**\n{c}",
         x: ":x: Insert a valid account!"
+    },
+    rolldice: {
+        x: ":x: Insert a valid number for the bet!",
+        x2: ":x: Enter a value from 1 to 12!",
+        x3: ":x: You can't bet with yourself!",
+        x4: ":x: You need to enter a number for the bet!",
+        x5: ":x: You don't have all that money to bet!",
+        x6: ":x: {User} doesn't have all that money to bet with you!",
+        txt: "Would you like to bet a value of **{quantia} :yen:**!\nWrite `Yes <number from 1 to 12>` in the chat to accept the bet!",
+        win: "🎲 I rolled the dices!\n\nValue of the first dice: **{dado1}**\nSecond dice value: **{dado2}**\nTotal: **{total}**\n\nThe closest value was {winner}, being him **{value}**"
+    },
+    daily: {
+        txt: "Congratulations you took your daily prize and received **{quantia}** :yen:\nCome back tomorrow to receive your prize again <a:yay:832444773407260692>",
+        x: "<:malFubukiSTOP:831987216300376074> What is the least wait there in the moral beauty?\n**Time remaining for the next daily:** \`{h}\`, \`{m}\`, \`{s}\`"
+    },
+    leaderboard: {
+        loading: "Running leaderboard...",
+        title: "Top Riches (Global)",
+        footer: "Your position in the ranking is #"
+    },
+    depositar: {
+        txt: "✅ It was deposited **{quantia}** :yen:, successfully in your bank!",
+        x: ":x: You don't even have money in your wallet to deposit.",
+        x1: ":x: Invalid amount!",
+        x2: ":x: You don't have all that money in your wallet!"
+    },
+    sacar: {
+        txt: "✅ It was withdrawn **{quantia}** :yen:, successfully from your bank!",
+        x: ":x: You don't even have money in the bank to deposit.",
+        x1: ":x: Invalid amount!",
+        x2: ":x: You don't have all that money in the bank!"
+    },
+    pagar: {
+        x: ":x: You don't have all that money in your wallet or bank!",
+        txt: "✅ You paid **{quantia}**, for {user}!"
+    },
+    anime: {
+        fields: [
+            "✅ Rating",
+            "🏆 Rank",
+            "💓 Popularity",
+            "⭐ Favorites",
+            "💁 Status",
+            "🤔 Display type",
+            "📺 Episodes",
+            "⏲️ Duration of episodes",
+            "📆 Created",
+            "📆 Ended",
+            "⚠️ Age rating"
+        ],
+        errs: [
+            "Date not identified",
+            "Anime on Display",
+            "Unidentified time",
+            "Unidentified favorites"
+        ],
+        texts: [
+            "On display",
+            "Finished",
+            "Not Released",
+            "Close to launch",
+            "No information"
+        ],
+        restrict: [
+            "Suggested parental guidance",
+            "General Audience",
+            "Explicit Content",
+            "Restricted"
+        ]
+    },
+    aniversario: {
+        txt: "✅ Who was born on `{data}`, have **{input}** years!",
+        err: ":x: Invalid date format!\n**Correct format**: `<day>`/`<month>`/`<year>`"
+    },
+    ocr: {
+        err: ":x: Invalid image URL!!"
+    },
+    addemoji: {
+        err: [
+            ":x: Invalid emoji!",
+            ":x: Use link only https://imgur.com/ and https://discord.com/!"
+        ]
+    },
+    level: {
+        status: [
+            "✅ Level system activated!",
+            "✅ Level system off!",
+            "✅ Level Up messages will now be sent in **{canal}**!"
+        ],
+        txt: "ℹ️ The current level of {user} on the server guild **{level}**!\n🌐 Global level: **{level2}**",
+        err: ":x: You are not allowed to configure the level system!",
+        err2: ":x: Invalid channel!",
+        up: "🆙 Congratulations {user}, you have risen to the level **{level}**!"
+    },
+    botinfo: {
+        title: "<a:tlPaiNom:813102166885138484> My informations",
+        e: "and",
+        txt: "Hello {user}! My name in this guild is **{client.name}**, i have **15** years old.\n\n> I currently have **{commands}** commands, i am currently in **{servers}** guild, with **{users}** users!\n\n> I was created in <:javascript:813113701091377162>[JavaScript](https://developer.mozilla.org/docs/Web/JavaScript) using <:eris:836351428226056232>[Eris](https://abal.moe/Eris/).\n> To view mt command list use `{prefix}help`.\n\nDid you know they do **{uptime}** that I'm awake?"
     },
     permissions: {
         P1: "Create instant invitations",
