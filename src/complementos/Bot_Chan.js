@@ -15,7 +15,8 @@ class Bot_Chan extends require("../handler_comandos/index").Client {
  const client = new Bot_Chan(`Bot ${require("../jsons/client.config.json").token}`, {
     restMode: true,
     intents: 1667,
-    defaultImageSize: 2048
+    defaultImageSize: 2048,
+    defaultImageFormat: "png"
  })
 
  // Comandos Slash
