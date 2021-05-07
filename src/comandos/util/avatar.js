@@ -35,7 +35,7 @@ class Avatar extends CommandStructure {
             user = message.member;
         }
 
-        const avatar = await user.avatarURL.replace("?size=128", "?size=2048").replace("jpg", "png");
+        const avatar = await user.avatarURL
 
         message.channel.createMessage({"content": message.member, 
         "embed": {
